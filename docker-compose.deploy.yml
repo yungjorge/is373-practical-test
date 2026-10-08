@@ -1,0 +1,59 @@
+name: is373-deploy
+services:
+  traefik:
+    image: traefik:v3.7.14
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.le.acme.email=${ACME_EMAIL:?Set ACME_EMAIL}
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+      - --accesslog=true
+    ports: ["80:80", "443:443"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certificates:/letsencrypt
+    networks: [production, qa]
+    restart: unless-stopped
+  production:
+    image: ${PROD_IMAGE:?Set PROD_IMAGE}
+    init: true
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    networks: [production]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: is373-production
+      traefik.http.routers.production.rule: "Host(`${DOMAIN:?Set DOMAIN}`)"
+      traefik.http.routers.production.entrypoints: websecure
+      traefik.http.routers.production.tls.certresolver: le
+      traefik.http.routers.production.service: production
+      traefik.http.services.production.loadbalancer.server.port: "3000"
+  qa:
+    image: ${QA_IMAGE:?Set QA_IMAGE}
+    init: true
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    networks: [qa]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: is373-qa
+      traefik.http.routers.qa.rule: "Host(`qa.${DOMAIN:?Set DOMAIN}`)"
+      traefik.http.routers.qa.entrypoints: websecure
+      traefik.http.routers.qa.tls.certresolver: le
+      traefik.http.routers.qa.service: qa
+      traefik.http.services.qa.loadbalancer.server.port: "3000"
+networks:
+  production:
+    name: is373-production
+  qa:
+    name: is373-qa
+volumes:
+  certificates:
+

@@ -1,0 +1,41 @@
+# Separate project name protects the existing development stack.
+name: is373-fall2026-traefik
+services:
+  traefik:
+    image: traefik:v3.7.13
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --accesslog=true
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: production
+    init: true
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - proxy
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.is373.rule: "PathPrefix(`/`)"
+      traefik.http.routers.is373.entrypoints: web
+      traefik.http.routers.is373.service: is373
+      traefik.http.services.is373.loadbalancer.server.port: "3000"
+
+networks:
+  proxy:
+    driver: bridge

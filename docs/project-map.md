@@ -12,12 +12,12 @@ This is the discovery phase of a CMS course. The working app is a local-content 
 
 | Location | Responsibility |
 | --- | --- |
-| `src/content/portfolio.ts` | Profile text and sample project records |
-| `src/app/page.tsx` | Homepage message and selected work |
+| `src/content/portfolio.ts` | Profile, verified professional summaries, skill groups, and separate sample project records |
+| `src/app/page.tsx` | Personal editorial homepage, professional work links, and skills anchor |
 | `src/app/about/page.tsx` | About presentation and optional email link |
-| `src/app/work/page.tsx` | Work index |
+| `src/app/work/page.tsx` | Professional summaries at project anchors, with a separate teaching-example archive |
 | `src/app/work/[slug]/page.tsx` | Case-study template generated from project data |
-| `src/app/layout.tsx` | Shared shell, metadata, footer, initial theme script |
+| `src/app/layout.tsx` | Personal metadata, shared shell, contact anchor, course-resource footer, initial theme script |
 | `src/components/header.tsx` | Brand and navigation |
 | `src/lib/themes.ts` | Theme registry and default |
 | `src/app/globals.css` | Semantic theme tokens and shared responsive styles |
@@ -25,11 +25,24 @@ This is the discovery phase of a CMS course. The working app is a local-content 
 | `src/app/learn/` and `src/content/` | Existing lessons and educational records |
 | `src/app/studio/page.tsx` | Theme previews and customization instructions |
 | `public/styles/` | Original SVG teaching illustrations |
-| `Dockerfile` and Compose files | Development and production environments |
+| `Dockerfile`, `compose.yaml`, `compose.production.yaml` | Development and non-root standalone production stages; localhost workflows preserved |
+| `docker-compose.deploy.yml`, `.env.server.example` | Same-server HTTPS QA/production stack, separate app networks and persistent ACME storage |
+| `.github/workflows/deploy.yml`, `scripts/deploy-service.sh` | Validated GHCR builds; qa/main deploy only their selected service |
+| `scripts/bootstrap-server.sh`, `scripts/harden-ssh.sh`, `docs/cicd-deployment.md` | Ubuntu 24.04 bootstrap, tested-account SSH hardening, practical/student handoff |
+| `Dockerfile.prod`, `docker-compose.prod.yml` | Public-IP HTTP production stack with Traefik |
+| `setup-server.sh`, `deploy.sh`, `docs/deployment.md` | Ubuntu 24.04 Docker installation, deployment commands, and assignment handoff |
 | `tests/portfolio.spec.ts` | Browser checks, including themes and accessibility |
 | `docs/` | Setup, discovery, AI, Docker, and project guidance |
 
 Personalization currently spans several files: changing the profile name does not automatically replace the header, footer, homepage, or metadata. See [Make this portfolio yours](portfolio-starter.md) for the complete checklist. There is currently no blog route, CMS, or QR feature. Do not describe planned features as implemented.
+
+## Personal redesign handoff
+
+The approved personal redesign uses Systems as the initial theme, with stone, orange, and dark green semantic tokens in `globals.css`. Base, Brutalist, Swiss, and Punk remain selectable; a saved browser preference still overrides the default. The professional navigation links to Work, About, homepage Skills, and the shared Contact section. Field guide and studio remain accessible through the footer.
+
+`professionalProjects` supplies factual summaries for Freight Estimator API, ProdTrack, Printing from CRM, and ResumeButler. Homepage rows link to their anchors on `/work`, not to new case-study routes. The original `projects` array and all three sample case-study routes remain intact and explicitly labeled as teaching examples. Do not use sample illustrations as professional screenshots. Contact has an honest pending message until a real email is supplied.
+
+The layout and behavior changes are covered by `tests/portfolio.spec.ts`, including the Systems default, all five themes, responsive Work/About pages, and professional navigation. The discovery brief retains the earlier checkpoint record and a separate redesign handoff. Professional evidence and peer feedback still require real human input.
 
 ## Implementation conventions
 

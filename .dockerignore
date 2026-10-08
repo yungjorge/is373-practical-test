@@ -7,3 +7,14 @@ node_modules
 *.log
 *.tsbuildinfo
 README.md
+docs
+tests
+playwright-report
+test-results
+coverage
+.vscode
+.idea
+*.pem
+*.key
+setup-server.sh
+deploy.sh

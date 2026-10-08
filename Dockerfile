@@ -5,7 +5,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS dependencies
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm npm ci
 
 FROM dependencies AS development
 COPY . .

@@ -29,7 +29,7 @@ curl --fail http://localhost:3000/api/health
 docker compose -f compose.production.yaml down
 ```
 
-The multi-stage Dockerfile produces a standalone Next.js image running as a non-root user. The production service includes a health check, restart policy, and dropped Linux capabilities. No source bind mounts or development dependencies are included in the final image. Ports bind to localhost; a public deployment needs a reverse proxy with HTTPS and appropriate host configuration.
+The multi-stage Dockerfile produces a standalone Next.js image running as a non-root user. The production service includes a health check, restart policy, and dropped Linux capabilities. No source bind mounts or development dependencies are included in the final image. Ports bind to localhost. For the assignment's public-IP HTTP deployment through Traefik, use the separate [DigitalOcean deployment guide](deployment.md). HTTPS is outside that assignment setup.
 
 To use another host port, copy `.env.example` to `.env` and change `APP_PORT`, or prefix a Compose command with `APP_PORT=3001`. This controls the published port, not the container's internal port.
 
@@ -60,5 +60,20 @@ npm start      # Serve the build locally
 - `.github/workflows/ci.yml` — lint, type check, Docker build, and HTTP smoke checks
 
 Commit `package-lock.json` when dependencies change. Environment files are ignored by Git and excluded from Docker builds. Pass server secrets explicitly at runtime when needed; never put secrets in variables prefixed `NEXT_PUBLIC_`, which are exposed to browsers and baked in at build time.
+
+## Practical HTTPS CI/CD
+
+Use [QA and production deployment](cicd-deployment.md) for the current practical.
+The old public-IP guide above is an HTTP-only exercise. The new workflow runs
+`npm ci`, `npm run check`, `npm run format:check`, serial browser tests,
+`npm run build`, and the production Docker build before deploying.
+For configuration validation without starting containers:
+
+```sh
+docker compose --env-file .env.server.example -f docker-compose.deploy.yml config --quiet
+bash -n scripts/bootstrap-server.sh
+bash -n scripts/harden-ssh.sh
+bash -n scripts/deploy-service.sh
+```
 
 Reference: [Next.js standalone output](https://nextjs.org/docs/app/api-reference/config/next-config-js/output).
