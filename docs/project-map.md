@@ -36,6 +36,16 @@ This is the discovery phase of a CMS course. The working app is a local-content 
 
 Personalization currently spans several files: changing the profile name does not automatically replace the header, footer, homepage, or metadata. See [Make this portfolio yours](portfolio-starter.md) for the complete checklist. There is currently no blog route, CMS, or QR feature. Do not describe planned features as implemented.
 
+## Practical deployment handoff
+
+The public practical repository is https://github.com/yungjorge/is373-practical-test.
+Production uses https://104-248-208-29.nip.io and QA uses
+https://qa.104-248-208-29.nip.io on the same Ubuntu server, accessed as jorge.
+The qa branch adds a visible “Deployment Status: QA Test” label on the homepage;
+main receives it only after promotion. Both workflows run browser checks serially.
+Real deployment and evidence collection require the Actions SSH key, trusted
+host-key verification, and ACME email. See docs/cicd-deployment.md.
+
 ## Personal redesign handoff
 
 The approved personal redesign uses Systems as the initial theme, with stone, orange, and dark green semantic tokens in `globals.css`. Base, Brutalist, Swiss, and Punk remain selectable; a saved browser preference still overrides the default. The professional navigation links to Work, About, homepage Skills, and the shared Contact section. Field guide and studio remain accessible through the footer.

@@ -230,6 +230,17 @@ ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -o BatchMode
 
 ## Local verification handoff — 2026-10-08
 
+Continuation: the public practical repository has been created and main pushed.
+The hostname examples now match 104.248.208.29 and account jorge. GitHub CI run
+37819578877 passed all its checks, including the production Docker smoke tests.
+Local validation of the visible QA label passed lint, types, formatting, build,
+and all 11 browser tests after extracting libnspr4, libnss3, and libasound2t64
+into a temporary directory and setting LD_LIBRARY_PATH. No WSL system packages
+were installed. The earlier browser limitation below is now resolved.
+SERVER_HOST, SERVER_USER, and DOMAIN are configured in repository secrets.
+ACME_EMAIL, SERVER_SSH_KEY, and verified SERVER_SSH_KNOWN_HOSTS remain pending.
+HTTPS currently refuses connections on port 443 for both hostnames.
+
 - Direct repository `npm ci` failed with EACCES on its existing node_modules.
   A temporary source copy in /tmp/is373-practical-check used checksum-verified
   Node 24.21.0; `npm ci` succeeded there without changing repository permissions.
