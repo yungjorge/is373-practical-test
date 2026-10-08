@@ -237,8 +237,8 @@ Local validation of the visible QA label passed lint, types, formatting, build,
 and all 11 browser tests after extracting libnspr4, libnss3, and libasound2t64
 into a temporary directory and setting LD_LIBRARY_PATH. No WSL system packages
 were installed. The earlier browser limitation below is now resolved.
-SERVER_HOST, SERVER_USER, and DOMAIN are configured in repository secrets.
-ACME_EMAIL, SERVER_SSH_KEY, and verified SERVER_SSH_KNOWN_HOSTS remain pending.
+SERVER_HOST, SERVER_USER, DOMAIN, and ACME_EMAIL are configured in repository secrets.
+SERVER_SSH_KEY and verified SERVER_SSH_KNOWN_HOSTS remain pending.
 HTTPS currently refuses connections on port 443 for both hostnames.
 
 - Direct repository `npm ci` failed with EACCES on its existing node_modules.

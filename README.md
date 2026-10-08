@@ -36,7 +36,7 @@ credentials were not yet configured. This is not a successful deployment.
 
 - Successful QA GitHub Actions run URL: **TODO**
 - Successful production GitHub Actions run URL: **TODO**
-- GitHub Container Registry package URL: **TODO**
+- GitHub Container Registry package URL: [public GHCR package](https://github.com/users/yungjorge/packages/container/package/is373-practical-test), [published production image evidence](docs/evidence/ghcr-production-image.png). Image `prod-a63aeda26a1d34c5af383faf854cea6254d073f2` was published; deployment remains pending.
 - QA deployed commit/tag (`qa-COMMIT_SHA`): **TODO**
 - Production deployed commit/tag (`prod-COMMIT_SHA`): **TODO**
 - QA screenshot showing HTTPS URL: **TODO**
