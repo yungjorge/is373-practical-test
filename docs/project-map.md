@@ -43,8 +43,11 @@ Production uses https://104-248-208-29.nip.io and QA uses
 https://qa.104-248-208-29.nip.io on the same Ubuntu server, accessed as jorge.
 The qa branch adds a visible “Deployment Status: QA Test” label on the homepage;
 main receives it only after promotion. Both workflows run browser checks serially.
-Real deployment and evidence collection require the Actions SSH key, trusted
-host-key verification, and ACME email. See docs/cicd-deployment.md.
+All required Actions secrets are configured. QA and production were deployed
+successfully and verified over HTTPS on October 8, 2026. README Test Evidence
+contains their exact image tags, workflow URLs, screenshots, SSH evidence, and
+the unchanged QA container ID during production deployment. Main's evidence-only
+commits do not redeploy application images. See docs/cicd-deployment.md.
 
 ## Personal redesign handoff
 

@@ -241,10 +241,17 @@ SERVER_HOST, SERVER_USER, DOMAIN, and ACME_EMAIL are configured in repository se
 All six repository secrets are now present, including the user-entered private
 key and console-verified server host key. Key login as jorge was verified and a
 root login attempt was rejected. The user-supplied effective-settings screenshot
-is saved under docs/evidence. Server bootstrap remains pending because sudo
-requires the user's password; Docker is absent and /opt/is373 does not yet exist.
-The bootstrap script was uploaded to ~/is373-bootstrap-server.sh on the server.
-HTTPS currently refuses connections on port 443 for both hostnames.
+is saved under docs/evidence. The user completed bootstrap with their sudo
+password; Docker 29.8.2 and Compose v5.6.0 are available to jorge. The agent
+created the server environment with mode 600 and started Traefik on 80/443.
+QA deployment run 37821482615 and production deployment run 37822058643 both
+succeeded. Both HTTPS health endpoints returned {"status":"ok"}; certificate
+issuers are Let's Encrypt. Both app containers are healthy, run as uid 1000,
+use separate networks, and do not publish port 3000. QA's container ID stayed
+unchanged during production deployment. See README Test Evidence for exact
+commits, image tags, URLs, screenshots, and recorded command output.
+README/docs-only pushes on main are excluded from deployment so evidence
+updates preserve the already verified application image tags.
 
 - Direct repository `npm ci` failed with EACCES on its existing node_modules.
   A temporary source copy in /tmp/is373-practical-check used checksum-verified
@@ -269,7 +276,12 @@ HTTPS currently refuses connections on port 443 for both hostnames.
   No dependency or lockfile changes were made; these need a separate review
   before treating the site as hardened production software.
 
-Real HTTPS, SSH, GHCR, and deployment evidence remain manual. Existing portfolio
-edits were preserved. No commits, pushes, deployments, or server changes were
-performed by the agent.
+The failed checks listed above describe the initial local attempt. Subsequent
+local browser tests passed and GitHub workflows verified production Docker
+build/runtime behavior. The agent committed and pushed the existing portfolio,
+deployment setup, QA marker, promotion, and evidence; deployed both environments;
+and preserved existing SSH hardening. No private keys, passwords, or tokens
+were added to repository files. The existing dependency audit findings remain
+unresolved; deployment functionality passes, but dependency upgrades need a
+separate review.
 

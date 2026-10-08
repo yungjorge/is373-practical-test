@@ -24,7 +24,10 @@ does not make the image public.
 
 ## Test Evidence
 
-Replace these placeholders only after observing real results:
+Verified on October 8, 2026. QA was deployed first, then merged into main and
+promoted to production. Both health endpoints returned `{"status":"ok"}` over
+HTTPS with normal certificate verification. The QA test marker is present in
+both environments after promotion.
 
 Repository setup evidence: [public repository](docs/evidence/public-repository.png)
 and [configured secret names](docs/evidence/github-secrets-configured.png).
@@ -34,17 +37,23 @@ The first [deployment workflow](https://github.com/yungjorge/is373-practical-tes
 passed validation, Docker build, and GHCR push, then stopped because deployment
 credentials were not yet configured. This is not a successful deployment.
 
-- Successful QA GitHub Actions run URL: **TODO**
-- Successful production GitHub Actions run URL: **TODO**
-- GitHub Container Registry package URL: [public GHCR package](https://github.com/users/yungjorge/packages/container/package/is373-practical-test), [published production image evidence](docs/evidence/ghcr-production-image.png). Image `prod-a63aeda26a1d34c5af383faf854cea6254d073f2` was published; deployment remains pending.
-- QA deployed commit/tag (`qa-COMMIT_SHA`): **TODO**
-- Production deployed commit/tag (`prod-COMMIT_SHA`): **TODO**
-- QA screenshot showing HTTPS URL: **TODO**
-- Production screenshot showing HTTPS URL: **TODO**
-- SSH-key login screenshot showing non-root username: screenshot **TODO**; [agent-observed key login as jorge](docs/evidence/ssh-access.txt).
-- sshd effective configuration screenshot: [user-supplied effective settings](docs/evidence/ssh-effective-settings.png), showing root/password login disabled and public-key authentication enabled.
-- Root-login rejection screenshot: screenshot **TODO**; [agent-observed root rejection](docs/evidence/ssh-access.txt).
-- QA/production container isolation evidence: **TODO**
+- Successful QA workflow: [run 37821482615](https://github.com/yungjorge/is373-practical-test/actions/runs/37821482615), [screenshot](docs/evidence/qa-workflow-success.png).
+- Successful production workflow: [run 37822058643](https://github.com/yungjorge/is373-practical-test/actions/runs/37822058643), [screenshot](docs/evidence/production-workflow-success.png).
+- GHCR package: [public package](https://github.com/users/yungjorge/packages/container/package/is373-practical-test), [both deployed tags](docs/evidence/ghcr-deployed-tags.png).
+- QA deployed commit: `e30cc9cdfa411ce4ba831852ae342cfc3200552d`; image: `ghcr.io/yungjorge/is373-practical-test:qa-e30cc9cdfa411ce4ba831852ae342cfc3200552d`.
+- Production deployed commit: `f8567e855891bd2e87fbf821755bae98921640fe`; image: `ghcr.io/yungjorge/is373-practical-test:prod-f8567e855891bd2e87fbf821755bae98921640fe`.
+- QA HTTPS page: [live QA](https://qa.104-248-208-29.nip.io), [screenshot](docs/evidence/qa-https.png).
+- Production HTTPS page: [live production](https://104-248-208-29.nip.io), [screenshot](docs/evidence/production-https.png).
+- Non-root SSH: [user-supplied jorge session screenshot](docs/evidence/ssh-effective-settings.png), [agent-observed key login](docs/evidence/ssh-access.txt), [bootstrap verification](docs/evidence/server-bootstrap.txt).
+- Effective sshd configuration: [user-supplied screenshot](docs/evidence/ssh-effective-settings.png), showing root/password login disabled and public-key authentication enabled.
+- Root SSH rejection: [observed rejection transcript](docs/evidence/ssh-access.txt), [screenshot of the recorded transcript](docs/evidence/ssh-observed-transcript.png). This screenshot shows the evidence file, not a live terminal.
+- Container isolation: [QA ID unchanged during production deployment](docs/evidence/service-isolation.txt), [healthy containers, non-root runtime, separate networks, no published port 3000](docs/evidence/deployed-containers.txt).
+- HTTPS certificates: [certificate subjects, Let's Encrypt issuers, and validity dates](docs/evidence/https-certificates.txt).
+
+Source pushes run lint, types, formatting, browser tests, Next.js build, Docker
+build, and GHCR publication before SSH deployment. Any failure stops deployment.
+Main's README/docs-only pushes do not redeploy the application, so the recorded
+image tags remain the versions actually verified above.
 
 ```sh
 ssh USER@SERVER
@@ -70,7 +79,7 @@ ssh -o BatchMode=yes -o PreferredAuthentications=publickey -i ~/.ssh/YOUR_ADMIN_
 Capture `Permission denied (publickey)` and exit status 255, then show successful
 non-root login. A connection timeout does not prove rejection. Follow the
 [guide](docs/cicd-deployment.md#evidence) for the remaining verification commands.
-These entries are placeholders, not claims of successful deployment.
+Evidence distinguishes user-supplied screenshots from agent-observed results.
 
 Your first project in Content Management Systems is to begin building a personal web presence. Use AI to help develop it, Docker to run it consistently, and a discovery process to decide what it should communicate. You should be able to explain both your choices and the work behind them.
 

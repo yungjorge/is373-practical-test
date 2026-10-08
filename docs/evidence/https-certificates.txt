@@ -1,0 +1,8 @@
+subject=CN = qa.104-248-208-29.nip.io
+issuer=C = US, O = Let's Encrypt, CN = YR2
+notBefore=Oct  8 17:09:04 2026 GMT
+notAfter=Jan  6 17:09:03 2027 GMT
+subject=CN = 104-248-208-29.nip.io
+issuer=C = US, O = Let's Encrypt, CN = YR2
+notBefore=Oct  8 17:13:34 2026 GMT
+notAfter=Jan  6 17:13:33 2027 GMT

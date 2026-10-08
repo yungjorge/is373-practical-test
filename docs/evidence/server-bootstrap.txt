@@ -1,0 +1,18 @@
+Observed 2026-10-08. Key login as jorge using id_ed25519 and strict host-key verification.
+jorge
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.5 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+Docker Compose version v5.6.0
+NAME                     IMAGE             COMMAND                  SERVICE   CREATED              STATUS              PORTS
+is373-deploy-traefik-1   traefik:v3.7.14   "/entrypoint.sh --pr…"   traefik   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
