@@ -1,5 +1,10 @@
 export const themes = [
   {
+    id: "systems",
+    name: "Systems",
+    description: "Editorial structure. Orange accents. Connected thinking.",
+  },
+  {
     id: "brutalist",
     name: "Brutalist",
     description: "Heavy rules. Oversized type. Nothing to hide.",
@@ -21,7 +26,7 @@ export const themes = [
   },
 ] as const;
 export type Theme = (typeof themes)[number]["id"];
-export const defaultTheme: Theme = "brutalist";
+export const defaultTheme: Theme = "systems";
 export const themeStorageKey = "is373-theme";
 export function isTheme(value: unknown): value is Theme {
   return themes.some((theme) => theme.id === value);

@@ -1,39 +1,70 @@
 import Link from "next/link";
-import Image from "next/image";
-import { projects } from "@/content/portfolio";
-import { PageIntro } from "@/components/page-intro";
+import { professionalProjects, projects } from "@/content/portfolio";
 export const metadata = { title: "Work" };
 export default function Work() {
   return (
-    <div className="section-pad">
-      <PageIntro
-        number="PORTFOLIO / SELECTED WORK"
-        title="Show the work. Share the thinking."
-      >
+    <div className="portfolio-section">
+      <div className="editorial-heading">
+        <p className="technical-label">Work / Project index</p>
+        <h1 className="editorial-title">
+          Practical problems.
+          <br />
+          Purposeful systems.
+        </h1>
         <p>
-          Three sample briefs to show how a case study can work. Replace these
-          with your own projects, contributions, and evidence.
+          Professional and independent project summaries. Supporting artifacts
+          are in preparation.
         </p>
-      </PageIntro>
-      <div className="work-list">
-        {projects.map((project, i) => (
-          <Link href={`/work/${project.slug}`} key={project.slug}>
-            <Image
-              src={project.image}
-              alt={project.imageAlt}
-              width={800}
-              height={560}
-            />
-            <div>
-              <p className="eyebrow">0{i + 1} / SAMPLE BRIEF</p>
-              <h2>{project.title}</h2>
-              <p>{project.summary}</p>
-              <p className="small-note">{project.discipline}</p>
-              <span className="text-link">View the case-study structure ↗</span>
+      </div>
+      <div className="project-records">
+        {professionalProjects.map((project, i) => (
+          <article
+            className="project-record"
+            id={project.slug}
+            key={project.slug}
+          >
+            <div className="record-heading">
+              <span className="work-number">0{i + 1}</span>
+              <div>
+                <p className="technical-label">{project.category}</p>
+                <h2>{project.title}</h2>
+              </div>
+              <span className="record-label">{project.label}</span>
             </div>
-          </Link>
+            <dl>
+              {[
+                ["Problem", project.problem],
+                ["System", project.system],
+                ["My role", project.role],
+                ["Technology", project.technology],
+                ["Outcome / status", project.status],
+              ].map(([term, text]) => (
+                <div key={term}>
+                  <dt>{term}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="evidence-note">{project.evidence}</p>
+          </article>
         ))}
       </div>
+      <aside className="course-archive" aria-labelledby="archive-title">
+        <p className="technical-label">IS373 / Learning archive</p>
+        <h2 id="archive-title">Starter teaching examples</h2>
+        <p>Course examples, separate from my professional work.</p>
+        <div>
+          {projects.map((project) => (
+            <Link
+              className="text-link"
+              key={project.slug}
+              href={`/work/${project.slug}`}
+            >
+              {project.title} ↗
+            </Link>
+          ))}
+        </div>
+      </aside>
     </div>
   );
 }

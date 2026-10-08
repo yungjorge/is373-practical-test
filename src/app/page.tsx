@@ -1,137 +1,153 @@
 import Link from "next/link";
-import Image from "next/image";
+import {
+  portfolio,
+  professionalProjects,
+  skillGroups,
+} from "@/content/portfolio";
 import { Button } from "@/components/ui/button";
-import { projects } from "@/content/portfolio";
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="status-dot" /> YOUR PORTFOLIO STARTS HERE / 001
-          </p>
-          <h1>
-            BUILD
-            <br />
-            SOMETHING
-            <span className="hero-last">
-              YOURS<span className="accent-dot">.</span>
-            </span>
-          </h1>
-          <p>
-            A little structure. A lot of possibility.
-            <br />A starting point for your work, your ideas, your point of
-            view.
-          </p>
-          <div className="button-row">
-            <Button asChild>
-              <Link href="/studio">
-                Make it yours <span aria-hidden="true">↗</span>
-              </Link>
-            </Button>
-            <Link className="text-link" href="/work">
-              Explore the sample work ↗
-            </Link>
-          </div>
+      <section className="editorial-hero" aria-labelledby="home-title">
+        <div className="folio-line">
+          <span>Independent thinking. Connected systems.</span>
+          <span>Portfolio / 2026</span>
         </div>
-        <div className="hero-art" aria-hidden="true">
-          <span className="art-label">OPEN TO POSSIBILITIES</span>
-          <svg viewBox="0 0 400 400">
-            <path
-              d="M70 320 320 70M100 70h220v220"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="60"
-            />
-          </svg>
-          <span className="art-bottom">IDEAS → INTO ACTION</span>
+        <h1 id="home-title" className="name-display">
+          JORGE
+          <span>
+            SANCHEZ<span className="name-period">.</span>
+          </span>
+        </h1>
+        <div className="hero-bottom">
+          <div className="hero-position">
+            <p className="technical-label">01 / Analysis into action</p>
+            <h2>
+              BUSINESS SYSTEMS ANALYST
+              <br />
+              <span>+ SYSTEMS BUILDER</span>
+            </h2>
+          </div>
+          <div className="hero-statement">
+            <p>{portfolio.intro}</p>
+            <div className="button-row">
+              <Button asChild>
+                <Link href="/work">
+                  View selected work <span aria-hidden="true">↗</span>
+                </Link>
+              </Button>
+              <Link className="text-link" href="/about">
+                About Jorge ↗
+              </Link>
+            </div>
+          </div>
+          <div className="system-mark" aria-hidden="true">
+            <span className="mark-orbit" />
+            <span className="mark-core" />
+            <span className="mark-label">INPUT → SYSTEM → OUTPUT</span>
+          </div>
         </div>
       </section>
-      <div className="ticker">
-        <span>THINK CLEARLY.</span>
-        <span>MAKE BOLDLY.</span>
-        <span>KEEP EXPLORING.</span>
-        <span aria-hidden="true">↗</span>
+      <div className="discipline-strip" aria-label="Areas of work">
+        {["Business", "Systems", "Automation", "Development"].map((item, i) => (
+          <span key={item}>
+            <small>0{i + 1}</small>
+            {item}
+            <b aria-hidden="true">+</b>
+          </span>
+        ))}
       </div>
-      <section className="section-pad">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">01 / THE WORK</p>
-            <h2>Start with a question.</h2>
-          </div>
+      <section className="portfolio-section" aria-labelledby="work-title">
+        <div className="editorial-heading">
+          <p className="technical-label">02 / Selected work</p>
+          <h2 id="work-title">
+            The problem.
+            <br />
+            <span className="muted-title">The system behind it.</span>
+          </h2>
           <Link className="text-link" href="/work">
-            All sample projects ↗
+            Explore project summaries ↗
           </Link>
         </div>
-        <div className="project-grid">
-          {projects.map((project, i) => (
+        <div className="selected-work">
+          {professionalProjects.map((project, i) => (
             <Link
-              className="project-card"
-              href={`/work/${project.slug}`}
+              className="work-row"
+              href={`/work#${project.slug}`}
               key={project.slug}
             >
-              <div className="project-image">
-                <Image
-                  src={project.image}
-                  alt={project.imageAlt}
-                  width={800}
-                  height={560}
-                />
+              <span className="work-number">0{i + 1}</span>
+              <div>
+                <p className="technical-label">{project.category}</p>
+                <h3>{project.title}</h3>
+                <p className="work-summary">{project.summary}</p>
               </div>
-              <div className="project-meta">
-                <span>0{i + 1} / SAMPLE PROJECT</span>
-                <span aria-hidden="true">↗</span>
+              <div className="work-row-meta">
+                <p>{project.technology}</p>
+                <span>{project.label}</span>
               </div>
-              <h3>{project.title}</h3>
-              <p>{project.discipline}</p>
+              <span className="row-arrow" aria-hidden="true">
+                ↗
+              </span>
             </Link>
           ))}
         </div>
+        <p className="evidence-note">
+          Project summaries from my own work. Detailed case studies and
+          shareable artifacts are being prepared.
+        </p>
       </section>
-      <section className="learning-grid" aria-label="Learning paths">
-        {[
-          [
-            "02",
-            "Design has a history.",
-            "From Bauhaus order to punk disruption. Find the visual language that fits your work.",
-            "/learn/design-styles",
-            "Explore design styles",
-          ],
-          [
-            "03",
-            "Make your work matter.",
-            "Use Cialdini’s principles to communicate value with clarity, evidence, and respect.",
-            "/learn/persuasion",
-            "Learn persuasion",
-          ],
-          [
-            "04",
-            "Find your character.",
-            "Explore 12 brand archetypes and turn your values into a recognizable voice.",
-            "/learn/archetypes",
-            "Find your archetype",
-          ],
-        ].map(([n, title, copy, href, label]) => (
-          <article key={n}>
-            <span className="big-number">{n}</span>
-            <h2>{title}</h2>
-            <p>{copy}</p>
-            <Link className="text-link" href={href}>
-              {label} ↗
-            </Link>
-          </article>
-        ))}
+      <section
+        id="skills"
+        className="systems-section"
+        aria-labelledby="skills-title"
+      >
+        <div className="editorial-heading">
+          <p className="technical-label">03 / Technical ecosystem</p>
+          <h2 id="skills-title">
+            Different tools.
+            <br />
+            One connected picture.
+          </h2>
+          <p>
+            Across business platforms, application development, and the
+            connections between them.
+          </p>
+        </div>
+        <div className="skills-grid">
+          {skillGroups.map((group, i) => (
+            <section key={group.title}>
+              <span className="technical-label">0{i + 1}</span>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
       </section>
-      <section className="closing">
-        <p className="eyebrow">SAME FOUNDATION. DIFFERENT ATTITUDE.</p>
-        <h2>
-          Change the theme.
-          <br />
-          Keep your point of view.
-        </h2>
-        <Button asChild variant="outline">
-          <Link href="/studio">Open the theme studio ↗</Link>
-        </Button>
+      <section
+        className="portfolio-section about-preview"
+        aria-labelledby="about-title"
+      >
+        <p className="technical-label">04 / Perspective</p>
+        <div>
+          <h2 id="about-title">
+            Designed to make sense.
+            <br />
+            Built to do the work.
+          </h2>
+          <p>
+            My path started in graphic design and prepress. It moved into
+            information systems, then business systems analysis. I care about
+            how a system works and how people find their way through it.
+          </p>
+          <Link href="/about" className="text-link">
+            Read my background ↗
+          </Link>
+        </div>
       </section>
     </>
   );

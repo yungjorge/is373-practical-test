@@ -25,8 +25,9 @@ export default function Studio() {
         <ThemePicker expanded />
         <p className="small-note">
           Your theme follows you across pages and is remembered in this browser.
-          Base is the neutral fallback you can return to at any time; Brutalist
-          is this starter’s initial theme.
+          Base is the neutral foundation you can return to at any time; Systems
+          is the portfolio’s initial theme. Saved preferences override the
+          default.
         </p>
       </section>
       <section className="studio-section">
@@ -37,7 +38,7 @@ export default function Studio() {
             <p className="eyebrow">ACTIONS</p>
             <div className="button-row">
               <Button asChild>
-                <Link href="/work">See sample work ↗</Link>
+                <Link href="/work">See selected work ↗</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/learn">Read the guide ↗</Link>

@@ -1,11 +1,11 @@
-// Students: personalize this file first. All projects below are explicitly labeled examples.
+// Professional summaries use owner-supplied facts. The projects array below remains teaching examples.
 export const portfolio = {
-  name: "Your name",
-  role: "Designer. Developer. Work in progress.",
+  name: "Jorge Sanchez",
+  role: "Business Systems Analyst + Systems Builder",
   intro:
-    "I turn questions into thoughtful digital experiences. This is where I share what I make, how I think, and what I learn along the way.",
+    "I turn manual and disconnected business processes into practical systems, automations, applications, and integrations.",
   email: "", // Add your real address to enable the contact link.
-  github: "https://github.com/kaw393939/is373_fall2026",
+  github: "",
 };
 export const projects = [
   {
@@ -54,5 +54,93 @@ export const projects = [
     outcome:
       "Sample exercise. Document your experiments and include the code that generates or displays them.",
     reflection: "Which constraints helped you create a more coherent system?",
+  },
+];
+
+export const professionalProjects = [
+  {
+    slug: "freight-estimator",
+    title: "Freight Estimator API",
+    category: "Business logic / Integration",
+    summary: "From SKU packaging to a shipping quote.",
+    technology: "PHP 8.3 / MySQL / FedEx API",
+    label: "Internal system",
+    problem:
+      "Shipping quotes need to account for SKU packaging configurations and mixed or multiple cartons.",
+    system:
+      "An API that calculates cartons and retrieves shipping rates using FedEx OAuth and Rates API, with US/Canada quoting, an admin tool, logging, testing, and security hardening.",
+    role: "Sole developer at Peerless Umbrella. Coordinated with web development, CRM integration, and accounting.",
+    status:
+      "Built for internal use. Usage and performance metrics are not published.",
+    evidence:
+      "Company-owned work. Sanitized diagrams and written case-study material are pending review; proprietary code, pricing, and customer data are not shared.",
+  },
+  {
+    slug: "prodtrack",
+    title: "ProdTrack",
+    category: "Production / Business applications",
+    summary: "Connecting production activity with business data.",
+    technology: "Power Apps / Power Automate / Dataverse",
+    label: "Photo approval verified",
+    problem:
+      "Production work needs scanning, status tracking, and photo approval functionality.",
+    system:
+      "Power Apps Canvas functionality connected to Dataverse and Dynamics 365, with a two-flow Dataverse queue architecture.",
+    role: "Built scanning, status, and photo approval functionality. Designed the queue architecture and diagnosed duplicate processing caused by trigger fan-out and non-atomic writes.",
+    status:
+      "Photo approval confirmed working. Daily adoption and usage metrics are not established.",
+    evidence:
+      "Internal work. Redacted screenshots and sanitized process diagrams are pending review.",
+  },
+  {
+    slug: "printing-from-crm",
+    title: "Printing from CRM",
+    category: "Workflow / Process automation",
+    summary: "Bringing production documents into the CRM workflow.",
+    technology: "Dynamics 365 / Power Automate",
+    label: "Deployment scope pending",
+    problem: "Production document generation relied on the ERP workflow.",
+    system:
+      "Automation designed to generate production documents from CRM, with document generation, PDF merging, and a Business Process Flow including QA and rejection stages.",
+    role: "Designed the automation and Business Process Flow; worked with document generation and PDF merging.",
+    status:
+      "Design and implementation work described here does not imply that unfinished portions were fully deployed.",
+    evidence:
+      "Internal work. Shareable artifacts and the precise deployment scope are pending confirmation.",
+  },
+  {
+    slug: "resumebutler",
+    title: "ResumeButler",
+    category: "Independent / Application development",
+    summary: "An independent application for AI-assisted resume tailoring.",
+    technology: "Next.js / TypeScript / AI integration",
+    label: "Live independent project",
+    problem: "Tailoring a resume to a particular opportunity.",
+    system:
+      "An AI resume tailoring SaaS built with Next.js, TypeScript, Tailwind, Neon Postgres, Prisma, NextAuth, Claude API, Stripe sandbox, Sentry, PostHog, Resend, and Vercel.",
+    role: "Solo founder and developer.",
+    status:
+      "Live application. Stripe is in sandbox mode. No users, revenue, or adoption metrics are claimed.",
+    evidence:
+      "Public demo destination and screenshots have not yet been supplied for this portfolio.",
+  },
+];
+
+export const skillGroups = [
+  {
+    title: "Business systems",
+    items: ["Power Apps", "Dynamics 365", "Dataverse", "Copilot Studio"],
+  },
+  {
+    title: "Automation",
+    items: ["Power Automate", "Python scripting", "Process workflows"],
+  },
+  {
+    title: "Development",
+    items: ["PHP", "React / Next.js", "TypeScript", "Git / GitHub"],
+  },
+  {
+    title: "Data & integration",
+    items: ["MySQL", "REST APIs / OAuth", "Power BI / DAX"],
   },
 ];

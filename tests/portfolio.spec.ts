@@ -43,7 +43,7 @@ test("themes persist through navigation, reload, and synchronize across tabs", a
   context,
 }) => {
   await page.goto("/studio");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "brutalist");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "systems");
   await page.getByRole("button", { name: /Swiss Precise/ }).click();
   await expect(page.getByLabel("Color and design theme")).toHaveValue("swiss");
   await page.getByRole("link", { name: "Work", exact: true }).click();
@@ -66,7 +66,7 @@ test("invalid stored theme falls back and switching works without storage", asyn
   );
   await page.goto("/");
   await expect(page.getByLabel("Color and design theme")).toHaveValue(
-    "brutalist",
+    "systems",
   );
   await page.addInitScript(() => {
     Object.defineProperty(window, "localStorage", {
@@ -111,7 +111,7 @@ test("history filters and brand brief reflect student choices", async ({
   );
 });
 
-for (const theme of ["brutalist", "base", "swiss", "punk"]) {
+for (const theme of ["systems", "brutalist", "base", "swiss", "punk"]) {
   test(`${theme}: responsive layout and accessible page controls`, async ({
     page,
   }) => {
@@ -121,6 +121,8 @@ for (const theme of ["brutalist", "base", "swiss", "punk"]) {
       await page.setViewportSize({ width, height: 900 });
       for (const route of [
         "/",
+        "/about",
+        "/work",
         "/studio",
         "/learn/design-styles",
         "/learn/archetypes",
@@ -137,6 +139,8 @@ for (const theme of ["brutalist", "base", "swiss", "punk"]) {
     await page.setViewportSize({ width: 1280, height: 900 });
     for (const route of [
       "/",
+      "/about",
+      "/work",
       "/studio",
       "/learn/archetypes",
       "/learn/persuasion",
@@ -158,4 +162,34 @@ test("skip link is reachable by keyboard", async ({ page }) => {
   ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("main")).toBeFocused();
+});
+
+test("professional navigation leads to real summaries and separates course examples", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "JORGESANCHEZ.",
+  );
+  await page.getByRole("link", { name: /01.*Freight Estimator API/ }).click();
+  await expect(page).toHaveURL(/\/work#freight-estimator$/);
+  await expect(page.locator("#freight-estimator")).toContainText(
+    "Sole developer",
+  );
+  await expect(page.locator("#freight-estimator")).toContainText(
+    "pending review",
+  );
+  await page.getByRole("link", { name: "Skills", exact: true }).click();
+  await expect(page).toHaveURL(/\/#skills$/);
+  await expect(
+    page.getByRole("heading", {
+      name: "Different tools. One connected picture.",
+    }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Contact", exact: true }).click();
+  await expect(page.locator("#contact")).toContainText(
+    "Contact details will be available here soon.",
+  );
+  await page.getByRole("link", { name: /IS373 field guide/ }).click();
+  await expect(page).toHaveURL(/\/learn$/);
 });

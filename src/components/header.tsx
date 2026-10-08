@@ -6,15 +6,15 @@ export function Header() {
   const path = usePathname();
   return (
     <header className="site-header">
-      <Link className="wordmark" href="/" aria-label="IS373 home">
-        IS373<span className="wordmark-dot">.</span>
+      <Link className="wordmark" href="/" aria-label="Jorge Sanchez home">
+        JS<span className="wordmark-dot">.</span>
       </Link>
       <nav aria-label="Main navigation">
         {[
           ["/work", "Work"],
           ["/about", "About"],
-          ["/learn", "Field guide"],
-          ["/studio", "Make it yours"],
+          ["/#skills", "Skills"],
+          ["/#contact", "Contact"],
         ].map(([href, label]) => (
           <Link
             key={href}
