@@ -1,0 +1,23 @@
+Observed on 2026-10-08 via SSH from the local machine.
+Host: 104.248.208.29
+Verified ED25519 host fingerprint:
+SHA256:AejsSXsrJ1Ej2dYk52ouk0rivf7OTo7h0Qv8XlhKWAA
+
+Key-based login as jorge with local id_ed25519:
+whoami -> jorge
+uname -m -> x86_64
+/etc/os-release -> Ubuntu 24.04.5 LTS, VERSION_ID=24.04
+
+Root login using that same local key with BatchMode and strict host checking:
+root@104.248.208.29: Permission denied (publickey).
+SSH command exit status: 255 (ssh); composite shell call returned 1.
+This proves rejection of this attempt. The supplied effective-settings
+screenshot separately shows PermitRootLogin no and PasswordAuthentication no.
+
+Bootstrap inspection:
+sudo -n true -> sudo: a password is required
+docker -> command not found
+/opt/is373 -> does not exist
+ss -ltn -> port 22 and loopback DNS listeners; no port 80/443 listeners.
+
+No private keys, passwords, or tokens are included in this evidence.

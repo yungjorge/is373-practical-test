@@ -41,9 +41,9 @@ credentials were not yet configured. This is not a successful deployment.
 - Production deployed commit/tag (`prod-COMMIT_SHA`): **TODO**
 - QA screenshot showing HTTPS URL: **TODO**
 - Production screenshot showing HTTPS URL: **TODO**
-- SSH-key login screenshot showing non-root username: **TODO**
-- sshd effective configuration screenshot: **TODO**
-- Root-login rejection screenshot: **TODO**
+- SSH-key login screenshot showing non-root username: screenshot **TODO**; [agent-observed key login as jorge](docs/evidence/ssh-access.txt).
+- sshd effective configuration screenshot: [user-supplied effective settings](docs/evidence/ssh-effective-settings.png), showing root/password login disabled and public-key authentication enabled.
+- Root-login rejection screenshot: screenshot **TODO**; [agent-observed root rejection](docs/evidence/ssh-access.txt).
 - QA/production container isolation evidence: **TODO**
 
 ```sh
