@@ -26,16 +26,24 @@ does not make the image public.
 
 Replace these placeholders only after observing real results:
 
+Repository setup evidence: [public repository](docs/evidence/public-repository.png)
+and [configured secret names](docs/evidence/github-secrets-configured.png).
+The initial [main CI run](https://github.com/yungjorge/is373-practical-test/actions/runs/37819578877)
+passed, including Docker production smoke checks; [screenshot](docs/evidence/main-ci-success.png).
+The first [deployment workflow](https://github.com/yungjorge/is373-practical-test/actions/runs/37819578811)
+passed validation, Docker build, and GHCR push, then stopped because deployment
+credentials were not yet configured. This is not a successful deployment.
+
 - Successful QA GitHub Actions run URL: **TODO**
 - Successful production GitHub Actions run URL: **TODO**
-- GitHub Container Registry package URL: **TODO**
+- GitHub Container Registry package URL: [public GHCR package](https://github.com/users/yungjorge/packages/container/package/is373-practical-test), [published production image evidence](docs/evidence/ghcr-production-image.png). Image `prod-a63aeda26a1d34c5af383faf854cea6254d073f2` was published; deployment remains pending.
 - QA deployed commit/tag (`qa-COMMIT_SHA`): **TODO**
 - Production deployed commit/tag (`prod-COMMIT_SHA`): **TODO**
 - QA screenshot showing HTTPS URL: **TODO**
 - Production screenshot showing HTTPS URL: **TODO**
-- SSH-key login screenshot showing non-root username: **TODO**
-- sshd effective configuration screenshot: **TODO**
-- Root-login rejection screenshot: **TODO**
+- SSH-key login screenshot showing non-root username: screenshot **TODO**; [agent-observed key login as jorge](docs/evidence/ssh-access.txt).
+- sshd effective configuration screenshot: [user-supplied effective settings](docs/evidence/ssh-effective-settings.png), showing root/password login disabled and public-key authentication enabled.
+- Root-login rejection screenshot: screenshot **TODO**; [agent-observed root rejection](docs/evidence/ssh-access.txt).
 - QA/production container isolation evidence: **TODO**
 
 ```sh

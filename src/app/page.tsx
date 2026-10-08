@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <>
       <section className="editorial-hero" aria-labelledby="home-title">
+        <p className="technical-label">Deployment Status: QA Test</p>
         <div className="folio-line">
           <span>Independent thinking. Connected systems.</span>
           <span>Portfolio / 2026</span>

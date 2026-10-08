@@ -18,7 +18,7 @@ jobs:
       - run: npm run format:check
       - name: Install browser for UI checks
         run: npx playwright install --with-deps chromium --only-shell
-      - run: npm run test:e2e
+      - run: npm run test:e2e -- --workers=1
       - name: Build and start production container
         run: docker compose -f compose.production.yaml up --build -d --wait --wait-timeout 120
       - name: Smoke test

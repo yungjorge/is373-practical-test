@@ -2,6 +2,10 @@ name: Deploy QA or production
 on:
   push:
     branches: [qa, main]
+    # Evidence-only updates do not change the deployed application image.
+    paths-ignore:
+      - README.md
+      - docs/**
 permissions:
   contents: read
   packages: write
